@@ -15,7 +15,6 @@
             <th>remember_token</th>
             <th>created_at</th>
             <th>updated_at</th>
-            
             @foreach($users as $row)
         <tr>
             <td>{{$row->id}}</td>

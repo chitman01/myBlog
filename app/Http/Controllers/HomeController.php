@@ -32,6 +32,11 @@ class HomeController extends Controller
         return view('layouts.nav');
     }
 
+    public function blog()
+    {
+        return view('blog');
+    }
+    
     public function index()
     {
         $users = DB::select('select * from users');

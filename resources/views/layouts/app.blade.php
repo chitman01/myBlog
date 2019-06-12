@@ -92,7 +92,10 @@
                 </div>
             </div>
         </nav>
+        @auth
         @include('layouts.nav')
+        @else
+        @endauth
         <div class="container">
             <main class="py-4">
                 @yield('content')

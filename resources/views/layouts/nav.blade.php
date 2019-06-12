@@ -18,7 +18,7 @@
             background-color: #FFFFFF;
             overflow-x: hidden;
             transition: 0.5s;
-            padding-top: 30px;
+
         }
 
         .sidenav a {
@@ -43,7 +43,6 @@
         }
 
         #main {
-
             position: fixed;
         }
 
@@ -54,6 +53,8 @@
 
             .sidenav a {
                 font-size: 18px;
+                border-style: solid;
+            border-width: 1px
             }
         }
     </style>
@@ -61,26 +62,26 @@
 
 <body>
     <div class="left-nav">
-        <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>
+        <div id="main">
+            <span style="font-size:30px;cursor:pointer;" onclick="openNav()">&#9776;</span>
         </div>
 
-        <div id="main">
-            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+        <div id="mySidenav" class="sidenav">
+            <span style="font-size:30px;cursor:pointer;" onclick="closeNav()">&#9776;</span>
+            <a href="{{route('index')}}">index</a>
+            <a href="{{route('blog.index')}}">---</a>
+
+
         </div>
     </div>
 
     <script>
         function openNav() {
+            document.getElementById("main").style.visibility = "hidden";
             document.getElementById("mySidenav").style.width = "200px";
             document.getElementById("main").style.marginLeft = "200px";
             document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-            document.getElementById("main").style.visibility = "hidden";
+
         }
 
         function closeNav() {
