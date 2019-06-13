@@ -37,10 +37,10 @@
                             <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('index')}}">Features</a>
+                            <a class="nav-link" href="{{route('index')}}">User</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
+                            <a class="nav-link" href="{{route('blog.index')}}">blog</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" href="#">Disabled</a>
@@ -92,10 +92,12 @@
                 </div>
             </div>
         </nav>
+        <!--
         @auth
         @include('layouts.nav')
         @else
         @endauth
+-->
         <div class="container">
             <main class="py-4">
                 @yield('content')

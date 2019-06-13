@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+@auth
 <style>
     .class-name {
         text-align: center;
@@ -127,21 +127,21 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                            <h4 class="modal-title">Edit Blog Heading</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
+                        <h4 class="modal-title">Edit Blog Heading</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
 
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="title">Title</label>
-                                <input type="text" name="title" class="form-control" id="title" />
-                            </div>
-                            <div class="form-group">
-                                <label for="detail">detail</label>
-                                <textarea type="text" name="detail" class="form-control" rows="5" id="detail"></textarea>
-                            </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" class="form-control" id="title" />
                         </div>
+                        <div class="form-group">
+                            <label for="detail">detail</label>
+                            <textarea type="text" name="detail" class="form-control" rows="5" id="detail"></textarea>
+                        </div>
+                    </div>
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
@@ -157,5 +157,5 @@
     <br>
     <a href="{{route('index')}}" class="btn btn-info">back to index</a>
 </div>
-
+@endauth
 @endsection
