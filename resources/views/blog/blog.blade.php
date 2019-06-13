@@ -58,8 +58,9 @@
                 <th>id</th>
                 <th>title</th>
                 <th>detail</th>
+                <th>image_filename</th>
+                <th>original_image_filename</th>
                 <th>created_at</th>
-                <th>updated_at</th>
                 <th>Delete</th>
             </tr>
             @foreach($blog as $row)
@@ -67,8 +68,9 @@
                 <td>{{$row->id}}</td>
                 <td>{{$row->title}}</td>
                 <td>{{$row->detail}}</td>
+                <td>{{$row->image_filename}}</td>
+                <td>{{$row->original_image_filename}}</td>
                 <td>{{$row->created_at}}</td>
-                <td>{{$row->updated_at}}</td>
                 <td>
                     <form method="post" class="delete_form" action="{{action('BlogController@destroy',$row->id)}}">
 
@@ -80,12 +82,13 @@
             </tr>
             @endforeach
         </table>
+        
 
         <!-- The Modal -->
         <div class="modal fade" id="myModal">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <form method="post" action="{{url('blog')}}">
+                    <form method="post" action="{{url('blog')}}" enctype="multipart/form-data">
                         {{csrf_field()}}
 
                         <!-- Modal Header -->
@@ -103,6 +106,10 @@
                             <div class="form-group">
                                 <label for="detail">detail</label>
                                 <textarea type="text" name="detail" class="form-control" rows="5" id="detail"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="image">image</label>
+                                <input type="file" name="image" >
                             </div>
                         </div>
 

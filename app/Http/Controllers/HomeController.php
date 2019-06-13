@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Blog;
 
 class HomeController extends Controller
 {
@@ -25,17 +26,16 @@ class HomeController extends Controller
 
     public function home()
     {
-        return view('home');
+        $data = DB::select('select * from blogs');
+        return view('home')
+            ->with(compact('data'));;
     }
     public function nav()
     {
         return view('layouts.nav');
     }
 
-    public function blog()
-    {
-        return view('blog');
-    }
+ 
     
     public function index()
     {

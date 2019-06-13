@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\blog;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+
 class BlogController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,7 @@ class BlogController extends Controller
     public function index()
     {
         $blog = DB::select('select * from blogs');
-        return view('blog')
+        return view('blog.blog')
             ->with(compact('blog'));
     }
 
@@ -35,16 +39,36 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        $this->validate($request,['title' => 'required' , 'detail' => 'required']);
+        $this->validate($request, [
+            'title' => 'required',
+            'detail' => 'required',
+            
+        ]);
+        /*
         $blog = new Blog([
             'title' => $request->get('title'),
-            'detail'=> $request->get('detail')
+            'detail' => $request->get('detail'),
+            'image' => $request->get('image')
         ]);
-        dd($blog);
-        //$blog->save(); 
-        return redirect()->route('blog.index')->with('success','บันทึกสำเร็จ');
+        */
+        //https://blog.hashvel.com/posts/laravel-image-upload/
+        $cover = $request->file('image');
+        $extension = $cover->getClientOriginalExtension();
+        Storage::disk('public')->put($cover->getFilename() . '.' . $extension,  File::get($cover));
+
+        $blog = new Blog();
+        $blog->title = $request->title;
+        $blog->detail = $request->detail;
+        //$blog->image = $cover->getClientMimeType();
+        $blog->original_image_filename = $cover->getClientOriginalName();
+        $blog->image_filename = $cover->getFilename() . '.' . $extension;
+
+        //dd($book);
+        $blog->save(); 
+        return redirect()->route('blog.index')->with('success', 'บันทึกสำเร็จ');
     }
 
     /**
@@ -85,8 +109,7 @@ class BlogController extends Controller
         $user->lname = $request->get('lname');
         //$user->save();
         return redirect()->route('user.index')->with('success', 'อัพเดทสำเร็จ');
-        */
-    }
+        */ }
 
     /**
      * Remove the specified resource from storage.
@@ -98,6 +121,6 @@ class BlogController extends Controller
     {
         $delete = Blog::find($id);
         //$delete->delete();
-        return redirect()->route('blog.index')->with('delete','ลบสำเร็จแล้ว');
+        return redirect()->route('blog.blog.index')->with('delete', 'ลบสำเร็จแล้ว');
     }
 }
