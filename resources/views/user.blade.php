@@ -1,4 +1,4 @@
-@extends('home')
+@extends('layouts.app')
 @section('content')
 
 <div class="container">
@@ -15,7 +15,7 @@
             <th>remember_token</th>
             <th>created_at</th>
             <th>updated_at</th>
-            @foreach($users as $row)
+            @foreach($user as $row)
         <tr>
             <td>{{$row->id}}</td>
             <td>{{$row->name}}</td>
@@ -31,9 +31,7 @@
 </div>
 <div class="container">
     <div class="col-sm-1">
-        <div class="btn btn-success">
-            ss
-        </div>
+    <a href="{{route('index')}}" class="btn btn-info">back to index</a>
     </div>
 </div>
 

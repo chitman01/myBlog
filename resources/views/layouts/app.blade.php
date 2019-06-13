@@ -37,14 +37,14 @@
                             <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('index')}}">User</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="{{route('blog.index')}}">blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
+                            <a class="nav-link" href="{{route('user')}}">User</a>
                         </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('view')}}">View</a>
+                    </li>
 
                     </ul>
                 </div>

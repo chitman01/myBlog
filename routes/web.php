@@ -13,12 +13,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/index', 'HomeController@index')->name('index');
-
+Route::get('/user', 'HomeController@user')->name('user');
+Route::get('/view', 'HomeController@view')->name('view');
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/nav', 'HomeController@nav')->name('nav');
+Route::get('/nav', 'HomeController@nav');
 
 Route::resource('blog', 'BlogController');
 

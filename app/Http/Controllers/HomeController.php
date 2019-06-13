@@ -28,19 +28,30 @@ class HomeController extends Controller
     {
         $data = DB::select('select * from blogs');
         return view('home')
-            ->with(compact('data'));;
+            ->with(compact('data'));
     }
     public function nav()
     {
         return view('layouts.nav');
     }
 
- 
-    
+    public function view()
+    {
+        
+        return view('view');
+    }
+
     public function index()
     {
         $users = DB::select('select * from users');
         return view('index')
             ->with(compact('users'));
+    }
+
+    public function user()
+    {
+        $user = DB::select('select * from users');
+        return view('user')
+            ->with(compact('user'));
     }
 }
