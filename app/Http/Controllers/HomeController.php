@@ -55,4 +55,10 @@ class HomeController extends Controller
         return view('user')
             ->with(compact('user'));
     }
+
+    public function check($id)
+    {
+        $data = DB::find($id);
+        dd($data);
+    }
 }

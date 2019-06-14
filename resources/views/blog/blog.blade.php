@@ -73,7 +73,6 @@
                 <td>{{$row->created_at}}</td>
                 <td>
                     <form method="post" class="delete_form" action="{{action('BlogController@destroy',$row->id)}}">
-
                         {{csrf_field()}}
                         <input type="hidden" name="_method" value="DELETE" />
                         <button type="submit" class="btn btn-danger">Delete</button>

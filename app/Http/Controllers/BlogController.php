@@ -121,6 +121,6 @@ class BlogController extends Controller
     {
         $delete = Blog::find($id);
         //$delete->delete();
-        return redirect()->route('blog.blog.index')->with('delete', 'ลบสำเร็จแล้ว');
+        return redirect()->route('blog.index')->with('delete', 'ลบสำเร็จแล้ว');
     }
 }
