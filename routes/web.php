@@ -11,9 +11,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['prefix' => 'admin'], function(){
+    Route::group(['middleware' => ['admin']], function(){
+        Route::get('/dashboard', 'admin\AdminController@index');
+    });
+});
 
 Route::get('/index', 'HomeController@index')->name('index');
+
 Route::get('/user', 'HomeController@user')->name('user');
+
 Route::get('/view', 'HomeController@view')->name('view');
 Route::get('/', function () {
     return view('welcome');
@@ -26,3 +33,4 @@ Route::resource('blog', 'BlogController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@home')->name('home');
+

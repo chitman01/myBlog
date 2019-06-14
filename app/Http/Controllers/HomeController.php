@@ -23,6 +23,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function index()
+    {
+        if (auth()->user()->isAdmin()) {
+            return view('admin/dashboard');
+        } else {
+            return view('/');
+        }
+    }
 
     public function home()
     {
@@ -37,15 +45,8 @@ class HomeController extends Controller
 
     public function view()
     {
-        
-        return view('view');
-    }
 
-    public function index()
-    {
-        $users = DB::select('select * from users');
-        return view('index')
-            ->with(compact('users'));
+        return view('view');
     }
 
     public function user()
