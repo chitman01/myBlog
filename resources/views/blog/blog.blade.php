@@ -21,6 +21,11 @@
     #blog {
         padding: 0px 0px 10px 0px;
     }
+
+    .center {
+        display: table;
+        margin: 0 auto;
+    }
 </style>
 
 <div class="container">
@@ -81,7 +86,10 @@
             </tr>
             @endforeach
         </table>
-        
+
+        <div class="center">
+            {!! $blog->render() !!}
+        </div>
 
         <!-- The Modal -->
         <div class="modal fade" id="myModal">
@@ -108,7 +116,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="image">image</label>
-                                <input type="file" name="image" >
+                                <input type="file" name="image">
                             </div>
                         </div>
 

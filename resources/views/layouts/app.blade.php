@@ -19,6 +19,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    <!-- Custom Jquery addby C -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -34,16 +37,16 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('home')}}">{{ __('messages.menu.home') }} <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('blog.index')}}">blog</a>
+                            <a class="nav-link" href="{{route('blog.index')}}">{{ __('messages.menu.blog') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('user')}}">User</a>
+                            <a class="nav-link" href="{{route('user')}}">{{ __('messages.menu.user') }}</a>
                         </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('view')}}">View</a>
+                        <a class="nav-link" href="{{route('view')}}">{{ __('messages.menu.view') }}</a>
                     </li>
 
                     </ul>

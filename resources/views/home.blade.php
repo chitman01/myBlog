@@ -1,5 +1,14 @@
 @extends('layouts.app')
 @section('content')
+<script>
+
+$(document).ready(function(){
+  $("#card_body").mouseenter(function(){
+        $(this).hide();
+  });
+});
+
+</script>
 <style>
     .card_body {
         width: 400px;
@@ -10,6 +19,11 @@
     .container a {
         color: black;
     }
+
+    .center {
+        display: table;
+        margin: 0 auto;
+    }
 </style>
 <div class="container">
     <h1>Home</h1>
@@ -17,10 +31,10 @@
 <div class="container">
 
     <div class="row">
-        @foreach($data as $row)
+        @foreach($blog as $row)
         <div class="col-sm-4 card_body">
-            <div class="container">
-                <form method="POST" class="view_form" action="{{action('HomeController@check',$row->title)}}">
+            <div class="container ddc">
+                <a action="{{action('HomeController@check',$row->title)}}">
                     {{csrf_field()}}
                     <div class="card">
                         <img class="card-img-top" src="{{url('uploads/'.$row->image_filename)}}" alt="{{$row->image_filename}}" style="width:100%">
@@ -29,14 +43,18 @@
                             <p class="card-text">{{$row->detail}}</p>
                         </div>
                     </div>
-                    <button type="submit" value="submit">submit</button>
-                </form>
+                </a>
             </div>
         </div>
         @endforeach
     </div>
+    <div class="center">
+        {!! $blog->render() !!}
+    </div>
+
     <a href="{{route('index')}}" class="btn btn-info">back to index</a>
 </div>
 
 @yield('content')
 @endsection
+

@@ -28,15 +28,20 @@ class HomeController extends Controller
         if (auth()->user()->isAdmin()) {
             return view('admin/dashboard');
         } else {
-            return view('/');
+            return view('view');
         }
     }
 
     public function home()
     {
-        $data = DB::select('select * from blogs');
-        return view('home')
-            ->with(compact('data'));
+        $blog = DB::table('blogs')->paginate(5);
+        $count = DB::table('blogs')->count();
+        return view('home',
+            [
+                'blog' => $blog,
+                'count' => $count
+            ]
+        );
     }
     public function nav()
     {

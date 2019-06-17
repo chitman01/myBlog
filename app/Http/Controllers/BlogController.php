@@ -18,9 +18,14 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blog = DB::select('select * from blogs');
-        return view('blog.blog')
-            ->with(compact('blog'));
+        $blog = DB::table('blogs')->paginate(5);
+        $count = DB::table('blogs')->count();
+        return view('blog.blog',
+            [
+                'blog' => $blog,
+                'count' => $count
+            ]
+        );
     }
 
     /**
@@ -45,7 +50,8 @@ class BlogController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'detail' => 'required',
-            
+            'image' => 'required',
+
         ]);
         /*
         $blog = new Blog([
@@ -67,7 +73,7 @@ class BlogController extends Controller
         $blog->image_filename = $cover->getFilename() . '.' . $extension;
 
         //dd($book);
-        $blog->save(); 
+        $blog->save();
         return redirect()->route('blog.index')->with('success', 'บันทึกสำเร็จ');
     }
 
