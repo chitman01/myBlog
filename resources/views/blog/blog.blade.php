@@ -1,23 +1,6 @@
-@extends('layouts.app')
-@section('content')
+
 @auth
 <style>
-    .class-name {
-        text-align: center;
-        font-family: arial;
-        font-size: 20px;
-        padding: 20px;
-        border: 3px solid red;
-    }
-
-    .ddc {
-        text-align: center;
-        font-family: arial;
-        font-size: 20px;
-        padding: 20px;
-        border: 3px solid red;
-    }
-
     #blog {
         padding: 0px 0px 10px 0px;
     }
@@ -26,12 +9,16 @@
         display: table;
         margin: 0 auto;
     }
+
+    .full_sc {
+        width: 100%;
+    }
 </style>
 
-<div class="container">
-    <div class="col-sm-4">
+<div class="container full_sc">
+    <div class="col-sm">
         <h1>Dashboard -> blog</h1>
-        <div class="container" id="blog">
+        <div class="col" id="blog">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                 Add Blog
             </button>
@@ -57,7 +44,7 @@
         <h2>{{ \Session::get('delete')}}</h2>
     </div>
     @endif
-    <div class="container" border="1">
+    <div class="col-sm" border="1">
         <table class="table table-bordered table-striped" align="center">
             <tr>
                 <th>id</th>
@@ -72,9 +59,22 @@
             <tr>
                 <td>{{$row->id}}</td>
                 <td>{{$row->title}}</td>
-                <td>{{$row->detail}}</td>
-                <td>{{$row->image_filename}}</td>
-                <td>{{$row->original_image_filename}}</td>
+                <td>
+                    @php
+                    echo substr($row->detail,1,10)."....";
+                    @endphp
+
+                </td>
+                <td>
+                    @php
+                    echo substr($row->image_filename,1,10)."....";
+                    @endphp
+                </td>
+                <td>
+                    @php
+                    echo substr($row->original_image_filename,1,10)."....";
+                    @endphp
+                </td>
                 <td>{{$row->created_at}}</td>
                 <td>
                     <form method="post" class="delete_form" action="{{action('BlogController@destroy',$row->id)}}">
@@ -132,44 +132,10 @@
             </div>
         </div>
 
-
-
-        <!-- The Modal -->
-        <div class="modal fade" id="myModal_edit">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                        <h4 class="modal-title">Edit Blog Heading</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" name="title" class="form-control" id="title" />
-                        </div>
-                        <div class="form-group">
-                            <label for="detail">detail</label>
-                            <textarea type="text" name="detail" class="form-control" rows="5" id="detail"></textarea>
-                        </div>
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <br>
     <a href="{{route('index')}}" class="btn btn-info">back to index</a>
 </div>
+
 @endauth
-@endsection

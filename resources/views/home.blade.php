@@ -29,7 +29,6 @@ $(document).ready(function(){
     <h1>Home</h1>
 </div>
 <div class="container">
-
     <div class="row">
         @foreach($blog as $row)
         <div class="col-sm-4 card_body">

@@ -1,23 +1,45 @@
-@extends('layouts.app')
-
+@extends('layouts.nav')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+<style>
+    .textcenter {
+        position: relative;
+    }
 
-                <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                    @endif
+    .center {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        text-align: center;
+        font-size: 18px;
+    }
 
-                    You are logged in! as admin
-                </div>
-            </div>
-        </div>
-    </div>
+    .preview-adminpage {
+        border: 1px solid red;
+    }
+
+    .showblog {
+        max-width: 100%;
+        border: none;
+    }
+</style>
+
+@inject('blog', 'App\Http\Controllers\BlogController')
+@inject('user', 'App\Http\Controllers\HomeController')
+
+
+{{--
+    <div class="container showblog">
+        Monthly Revenue: {{ $blog->index() }}
 </div>
+--}}
+
+<div class="container showblog">
+        Monthly Revenue: {{ $user->user() }}
+</div>
+
+
+
+
+
 @endsection
