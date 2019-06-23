@@ -13,12 +13,30 @@
     .full_sc {
         width: 100%;
     }
+
+    .right{
+        float: right;
+    }
 </style>
 
 <div class="container full_sc">
     <div class="col-sm blog">
         <h1>Dashboard -> User</h1>
+        <div class="col">
+            <form class="form-inline right" name="searchform" id="searchform">
+                <div class="form-group">
+                    <label for="textsearch" >User</label>
+                    <input type="text" name="itemname" id="itemname" class="form-control" placeholder="user search" autocomplete="off">
+                </div>
+                    <button type="button" class="btn btn-primary" id="btnSearch">
+                    <span class="glyphicon glyphicon-search"></span>
+                    user
+                </button>
+            </form>
+        </div>
     </div>
+    
+    
 
     <div class="col-sm" border="1">
         <table class="table table-bordered table-striped" align="center">
@@ -51,5 +69,11 @@
     <div class="col-sm-2">
     <a href="{{route('index')}}" class="btn btn-info">back to index</a>
 </div>
+
+<script>
+    $("#btnSearch").click(function () {
+        alert("Show");
+     });
+</script>
 
 @endauth

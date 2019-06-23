@@ -13,15 +13,31 @@
     .full_sc {
         width: 100%;
     }
+
+    .right{
+        float: right;
+    }
 </style>
 
 <div class="container full_sc">
     <div class="col-sm">
-        <h1>Dashboard -> blog</h1>
+        <h1>Dashboard -> blog</h1><!-- https://www.itoffside.com/php-search-mysql-by-ajax/ -->
         <div class="col" id="blog">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                 Add Blog
             </button>
+            
+            <form class="form-inline right" name="searchform" id="searchform">
+                <div class="form-group">
+                    <label for="textsearch" >User</label>
+                    <input type="text" name="itemname" id="itemname" class="form-control" placeholder="user search" autocomplete="off">
+                </div>
+                <button type="button" class="btn btn-primary" id="btnSearch">
+                <span class="glyphicon glyphicon-search"></span>
+                user
+                </button>
+            </form>
+
         </div>
 
     </div>
