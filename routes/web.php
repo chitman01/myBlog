@@ -20,6 +20,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/dashboard', 'admin\AdminController@index');
     });
 });
+Route::get('/main_blog','HomeController@main_blog');
+Route::get('/search','userController@search');
 
 Route::POST('/check','HomeController@check')->name('check');
 

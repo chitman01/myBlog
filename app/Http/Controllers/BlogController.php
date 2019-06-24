@@ -18,6 +18,7 @@ class BlogController extends Controller
      */
     public function index()
     {
+        //        $blog = DB::table('blogs')->take(3)->get();
         $blog = DB::table('blogs')->paginate(5);
         $count = DB::table('blogs')->count();
         return view('blog.blog',

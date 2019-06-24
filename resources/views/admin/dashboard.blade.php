@@ -24,22 +24,4 @@
     }
 </style>
 
-@inject('blog', 'App\Http\Controllers\BlogController')
-@inject('user', 'App\Http\Controllers\HomeController')
-
-
-{{--
-    <div class="container showblog">
-        Monthly Revenue: {{ $blog->index() }}
-</div>
---}}
-
-<div class="container showblog">
-        Monthly Revenue: {{ $user->user() }}
-</div>
-
-
-
-
-
 @endsection
