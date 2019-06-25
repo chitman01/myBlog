@@ -10,5 +10,9 @@ class AdminController extends Controller
     function index()
     {
         return view('admin/dashboard');
-     }
+    }
+
+    function profile(){
+        return view('admin/profile');
+    }
 }

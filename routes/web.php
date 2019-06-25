@@ -17,11 +17,18 @@ use App\User;
 
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => ['admin']], function () {
-        Route::get('/dashboard', 'admin\AdminController@index');
+        Route::get('/dashboard', 'admin\AdminController@index')->name('dashboard');
     });
 });
+
+Route::get('profile','admin\AdminController@profile')->name('profile');
+
 Route::get('/main_blog','HomeController@main_blog');
 Route::get('/search','userController@search');
+
+Route::get('/navigation_user','userController@navigation_user');
+
+Route::get('/navigation_blog','BlogController@navigation_blog');
 
 Route::POST('/check','HomeController@check')->name('check');
 

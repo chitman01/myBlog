@@ -82,8 +82,7 @@
             console.log(value);
             $.ajax({
                 type: 'get',
-                url: '{{URL::to('
-                search ')}}',
+                url: '{{URL::to('search')}}',
                 data: {
                     'search': value
                 },
@@ -97,6 +96,14 @@
                 }
             });
         });
+    });
+</script>
+
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'csrftoken': '{{ csrf_token() }}'
+        }
     });
 </script>
 

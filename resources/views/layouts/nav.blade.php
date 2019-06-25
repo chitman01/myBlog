@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta name="_token" content="{{ csrf_token() }}">
 
 <head>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -20,7 +21,6 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-inverse sidebar" role="navigation">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -72,6 +72,16 @@
 
     <script>
         $(document).ready(function() {
+            $("#nav_li_dashboard").click(function() {
+                $(".nav_ul_top li").removeClass("active");
+                $("#nav_li_dashboard").addClass("active");
+                $(".main").load("{{route('dashboard')}}");
+            });
+            $("#nav_li_profile").click(function() {
+                $(".nav_ul_top li").removeClass("active");
+                $("#nav_li_profile").addClass("active");
+                $(".main").load("{{route('profile')}}");
+            });
             $("#nav_li_blog").click(function() {
                 $(".nav_ul_top li").removeClass("active");
                 $("#nav_li_blog").addClass("active");

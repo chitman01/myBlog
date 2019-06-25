@@ -30,4 +30,12 @@ class userController extends Controller
         }
     }
 
+    function navigation_user(){
+        $data1 = 4;
+        $data2 = 6;
+        $count = DB::table('users')
+            ->whereBetween('id', array($data1, $data2))->get();
+        dd($count);
+        return Response($count);
+    }
 }

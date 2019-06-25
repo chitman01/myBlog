@@ -1,4 +1,5 @@
-
+@extends('layouts.app')
+@section('content')
 <script>
 
 $(document).ready(function(){
@@ -53,3 +54,4 @@ $(document).ready(function(){
     <a href="{{route('index')}}" class="btn btn-info">back to index</a>
 </div>
 
+@endsection

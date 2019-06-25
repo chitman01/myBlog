@@ -1,4 +1,3 @@
-
 @auth
 <style>
     #blog {
@@ -14,10 +13,11 @@
         width: 100%;
     }
 
-    .right{
+    .right {
         float: right;
     }
 </style>
+<meta name="_token" content="{{ csrf_token() }}">
 
 <div class="container full_sc">
     <div class="col-sm">
@@ -26,15 +26,15 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                 Add Blog
             </button>
-            
+
             <form class="form-inline right" name="searchform" id="searchform">
                 <div class="form-group">
-                    <label for="textsearch" >User</label>
+                    <label for="textsearch">User</label>
                     <input type="text" name="itemname" id="itemname" class="form-control" placeholder="user search" autocomplete="off">
                 </div>
                 <button type="button" class="btn btn-primary" id="btnSearch">
-                <span class="glyphicon glyphicon-search"></span>
-                user
+                    <span class="glyphicon glyphicon-search"></span>
+                    user
                 </button>
             </form>
 
@@ -62,49 +62,68 @@
     @endif
     <div class="col-sm" border="1">
         <table class="table table-bordered table-striped" align="center">
-            <tr>
-                <th>id</th>
-                <th>title</th>
-                <th>detail</th>
-                <th>image_filename</th>
-                <th>original_image_filename</th>
-                <th>created_at</th>
-                <th>Delete</th>
-            </tr>
-            @foreach($blog as $row)
-            <tr>
-                <td>{{$row->id}}</td>
-                <td>{{$row->title}}</td>
-                <td>
-                    @php
-                    echo substr($row->detail,1,10)."....";
-                    @endphp
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>title</th>
+                    <th>detail</th>
+                    <th>image_filename</th>
+                    <th>original_image_filename</th>
+                    <th>created_at</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($blog as $row)
+                <tr>
+                    <td>{{$row->id}}</td>
+                    <td>{{$row->title}}</td>
+                    <td>
+                        @php
+                        echo substr($row->detail,1,10)."....";
+                        @endphp
 
-                </td>
-                <td>
-                    @php
-                    echo substr($row->image_filename,1,10)."....";
-                    @endphp
-                </td>
-                <td>
-                    @php
-                    echo substr($row->original_image_filename,1,10)."....";
-                    @endphp
-                </td>
-                <td>{{$row->created_at}}</td>
-                <td>
-                    <form method="post" class="delete_form" action="{{action('BlogController@destroy',$row->id)}}">
-                        {{csrf_field()}}
-                        <input type="hidden" name="_method" value="DELETE" />
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
+                    </td>
+                    <td>
+                        @php
+                        echo substr($row->image_filename,1,10)."....";
+                        @endphp
+                    </td>
+                    <td>
+                        @php
+                        echo substr($row->original_image_filename,1,10)."....";
+                        @endphp
+                    </td>
+                    <td>{{$row->created_at}}</td>
+                    <td>
+                        
+                        <button type="submit" class="btn btn-danger delete_blog">Delete</button>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+
         </table>
 
         <div class="center">
-            {!! $blog->render() !!}
+            <ul class="pagination" role="navigation">
+                <li class="page-item page-item_Previous disabled" aria-label="« Previous">
+                    <a class="page-link" href="#" rel="previous" aria-hidden="true">‹</a>
+                </li>
+                <?php
+                for ($i = 0; $i <= $count; $i++) {
+                    ?>
+                    <li class="page-item"><a class="page-link a" href="#" id="page<?php echo ($i + 1); ?>"><?php echo ($i + 1); ?></a></li>
+                    <?php
+
+                    $count -= 3;
+                }
+                ?>
+                <!--<li class="page-item active" aria-current="page"><span class="page-link">1</span></li>-->
+                <li class="page-item">
+                    <a class="page-link page-link_Next" href="#" rel="next" aria-label="Next »">›</a>
+                </li>
+            </ul>
         </div>
 
         <!-- The Modal -->
@@ -153,5 +172,54 @@
     <br>
     <a href="{{route('index')}}" class="btn btn-info">back to index</a>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $(".a").click(function() {
+            var number_of_page = $(this).text();
+            page_num = parseInt(number_of_page);
+            console.log(number_of_page);
+                var data1 = number_of_page * 3;
+                var data2 = data1 - 2;
+               
+                console.log(data1);
+            console.log(data2);
+            $.ajax({
+                type: 'get',
+                url: '{{URL::to('navigation_blog')}}',
+                data: {
+                    "data1": data1,
+                    "data2": data2,
+                },
+                success: function(data) {
+                    console.log("success ajax");
+                    console.log(data);
+                    $('tbody').html(data);
+                },
+                error: function(data) {
+                    //alert(data.responseText)
+                    console.log("error ajax");
+                }
+            });
+            
+            if(page_num!=1){
+                $(".page-item_Previous").removeClass("disabled");
+            }else{
+                $(".page-item_Previous").addClass("disabled");
+            }
+        });
+    });
+    $(document).on('click',".delete_blog",function() {
+            var r = confirm("Press a button!");
+    });
+    
+</script>
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'csrftoken': '{{ csrf_token() }}'
+        }
+    });
+</script>
 
 @endauth

@@ -10,6 +10,28 @@ use App\blog;
 
 class BlogController extends Controller
 {
+    function navigation_blog(Request $data)
+    {
+        if ($data->ajax()) {
+            $output = "";
+            $get_data = DB::table('blogs')
+                ->whereBetween('id', array($data->data2,$data->data1))->get();
+            if ($get_data) {
+                foreach ($get_data as $key => $raw) {
+                    $output .= '<tr>' .
+                        '<td>' . $raw->id . '</td>' .
+                        '<td>' . substr($raw->title,1,10) . '</td>' .
+                        '<td>' . substr($raw->detail,1,10) . '</td>' .
+                        '<td>' . substr($raw->image_filename,1,10) . '</td>' .
+                        '<td>' . substr($raw->original_image_filename,1,10) . '</td>' .
+                        '<td>' . $raw->created_at . '</td>' .
+                        '<td>' .'<button type="submit" class="btn btn-danger">Delete</button>'. '</td>'.
+                        '</tr>';
+                }
+                return Response($output);
+            }
+        }
+    }
 
     /**
      * Display a listing of the resource.
@@ -18,10 +40,12 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //        $blog = DB::table('blogs')->take(3)->get();
-        $blog = DB::table('blogs')->paginate(5);
+        //$blog = DB::table('blogs')->paginate(5);
+        $blog = DB::table('blogs')->take(3)->get();
+
         $count = DB::table('blogs')->count();
-        return view('blog.blog',
+        return view(
+            'blog.blog',
             [
                 'blog' => $blog,
                 'count' => $count
@@ -127,7 +151,9 @@ class BlogController extends Controller
     public function destroy($id)
     {
         $delete = Blog::find($id);
+        dd($delete);
+
         //$delete->delete();
-        return redirect()->route('blog.index')->with('delete', 'ลบสำเร็จแล้ว');
+        //return redirect()->route('blog.index')->with('delete', 'ลบสำเร็จแล้ว');
     }
 }
