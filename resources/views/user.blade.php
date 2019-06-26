@@ -76,7 +76,6 @@
 </div>
 
 <script>
-    $(document).ready(function() {
         $("#textsearch").on('keyup', function() {
             var value = $(this).val();
             console.log(value);
@@ -96,7 +95,6 @@
                 }
             });
         });
-    });
 </script>
 
 <script type="text/javascript">

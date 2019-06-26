@@ -10,7 +10,7 @@ use App\blog;
 
 class BlogController extends Controller
 {
-    function navigation_blog(Request $data)
+    function Pagination_blog(Request $data)
     {
         if ($data->ajax()) {
             $output = "";
@@ -25,7 +25,7 @@ class BlogController extends Controller
                         '<td>' . substr($raw->image_filename,1,10) . '</td>' .
                         '<td>' . substr($raw->original_image_filename,1,10) . '</td>' .
                         '<td>' . $raw->created_at . '</td>' .
-                        '<td>' .'<button type="submit" class="btn btn-danger">Delete</button>'. '</td>'.
+                        '<td>' .'<button type="submit" class="btn btn-danger delete_blog" id="'.$raw->id.'">Delete</button>'. '</td>'.
                         '</tr>';
                 }
                 return Response($output);
@@ -33,6 +33,27 @@ class BlogController extends Controller
         }
     }
 
+    function search(Request $data)
+    {
+        if ($data->ajax()) {
+            $output = "";
+            $blogs = DB::table('blogs')->where('title', 'LIKE', '%' . $data->search . '%')->get();
+            if ($blogs) {
+                foreach ($blogs as $key => $raw) {
+                    $output .= '<tr>' .
+                        '<td>' . $raw->id . '</td>' .
+                        '<td>' . substr($raw->title,1,10) . '</td>' .
+                        '<td>' . substr($raw->detail,1,10) . '</td>' .
+                        '<td>' . substr($raw->image_filename,1,10) . '</td>' .
+                        '<td>' . substr($raw->original_image_filename,1,10) . '</td>' .
+                        '<td>' . $raw->created_at . '</td>' .
+                        '<td>' .'<button type="submit" class="btn btn-danger delete_blog" id="'.$raw->id.'">Delete</button>'. '</td>'.
+                        '</tr>';
+                }
+                return Response($output);
+            }
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -148,12 +169,11 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $data)
     {
-        $delete = Blog::find($id);
-        dd($delete);
-
+        $delete = Blog::find($data->id);
+        dd($data->id);
         //$delete->delete();
-        //return redirect()->route('blog.index')->with('delete', 'ลบสำเร็จแล้ว');
+       //return redirect()->route('blog.index')->with('delete', 'ลบสำเร็จแล้ว');
     }
 }

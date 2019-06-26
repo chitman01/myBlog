@@ -23,12 +23,18 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::get('profile','admin\AdminController@profile')->name('profile');
 
+Route::get('/blog_destroy','BlogController@destroy')->name('blog_destroy');
+
 Route::get('/main_blog','HomeController@main_blog');
+
 Route::get('/search','userController@search');
+
+Route::get('/search_blog','BlogController@search')->name('search_blog');
+
 
 Route::get('/navigation_user','userController@navigation_user');
 
-Route::get('/navigation_blog','BlogController@navigation_blog');
+Route::get('/Pagination_blog','BlogController@Pagination_blog');
 
 Route::POST('/check','HomeController@check')->name('check');
 

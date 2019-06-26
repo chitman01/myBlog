@@ -29,18 +29,13 @@
 
             <form class="form-inline right" name="searchform" id="searchform">
                 <div class="form-group">
-                    <label for="textsearch">User</label>
-                    <input type="text" name="itemname" id="itemname" class="form-control" placeholder="user search" autocomplete="off">
+                    <label for="textsearch">Blog</label>
+                    <input type="text" name="textsearch" id="textsearch" class="form-control" placeholder="user search" autocomplete="off">
                 </div>
-                <button type="button" class="btn btn-primary" id="btnSearch">
-                    <span class="glyphicon glyphicon-search"></span>
-                    user
-                </button>
             </form>
-
         </div>
-
     </div>
+
     @if(count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
@@ -49,8 +44,6 @@
             @endforeach
         </ul>
     </div>
-    @endif
-    @if(\Session::has('success'))
     <div class="alert alert-success">
         <p>{{ \Session::get('success')}}</p>
     </div>
@@ -60,6 +53,7 @@
         <h2>{{ \Session::get('delete')}}</h2>
     </div>
     @endif
+
     <div class="col-sm" border="1">
         <table class="table table-bordered table-striped" align="center">
             <thead>
@@ -75,7 +69,7 @@
             </thead>
             <tbody>
                 @foreach($blog as $row)
-                <tr>
+                <tr id="tr{{$row->id}}">
                     <td>{{$row->id}}</td>
                     <td>{{$row->title}}</td>
                     <td>
@@ -97,7 +91,7 @@
                     <td>{{$row->created_at}}</td>
                     <td>
                         
-                        <button type="submit" class="btn btn-danger delete_blog">Delete</button>
+                        <button type="submit" class="btn btn-danger delete_blog" id="{{$row->id}}">Delete</button>
                     </td>
                 </tr>
                 @endforeach
@@ -119,7 +113,6 @@
                     $count -= 3;
                 }
                 ?>
-                <!--<li class="page-item active" aria-current="page"><span class="page-link">1</span></li>-->
                 <li class="page-item">
                     <a class="page-link page-link_Next" href="#" rel="next" aria-label="Next »">›</a>
                 </li>
@@ -174,26 +167,43 @@
 </div>
 
 <script>
-    $(document).ready(function() {
-        $(".a").click(function() {
+
+$(document).ready(function() {
+        $("#textsearch").on('keyup', function() {
+            var value = $(this).val();
+            console.log(value);
+            $.ajax({
+                type: 'get',
+                url: '{{URL::to('search_blog')}}',
+                data: {
+                    'search': value
+                },
+                success: function(data) {
+                    console.log("success ajax");
+                    $('tbody').html(data);
+                },
+                error: function(data) {
+                    //alert(data.responseText)
+                    console.log("error ajax");
+                }
+            });
+        });
+    });
+        $(document).on('click',".a",function() {
             var number_of_page = $(this).text();
             page_num = parseInt(number_of_page);
             console.log(number_of_page);
                 var data1 = number_of_page * 3;
                 var data2 = data1 - 2;
-               
-                console.log(data1);
-            console.log(data2);
             $.ajax({
                 type: 'get',
-                url: '{{URL::to('navigation_blog')}}',
+                url: '{{URL::to('Pagination_blog')}}',
                 data: {
                     "data1": data1,
                     "data2": data2,
                 },
                 success: function(data) {
                     console.log("success ajax");
-                    console.log(data);
                     $('tbody').html(data);
                 },
                 error: function(data) {
@@ -208,12 +218,8 @@
                 $(".page-item_Previous").addClass("disabled");
             }
         });
-    });
-    $(document).on('click',".delete_blog",function() {
-            var r = confirm("Press a button!");
-    });
-    
 </script>
+
 <script type="text/javascript">
     $.ajaxSetup({
         headers: {

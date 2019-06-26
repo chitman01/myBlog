@@ -70,7 +70,7 @@
         @yield('content')
     </div>
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function() {
             $("#nav_li_dashboard").click(function() {
                 $(".nav_ul_top li").removeClass("active");
@@ -117,7 +117,43 @@
                 htmlbodyHeightUpdate()
             });
         });
+
+        // Form blog -> delete
+        $(document).on('click',".delete_blog",function() {
+        var id = this.id;
+        console.log(id);
+        var confirm_delete = confirm("Press a button!");
+        if (confirm_delete == true) {
+            console.log("You pressed OK!");
+            $.ajax({
+                type: 'get',
+                url: '{{URL::to('blog_destroy')}}',
+                data: {
+                    "id": id
+                },
+                success: function(data) {
+                    console.log("Delete Success");
+                    $("#tr"+id).remove();
+                
+                },
+                error: function(data) {
+                    console.log("error ajax");
+                }
+            });
+        } else {
+            console.log("You pressed Cancel!");
+        }
+    });
     </script>
+
+
+<script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'csrftoken': '{{ csrf_token() }}'
+        }
+    });
+</script>
 </body>
 
 </html>
