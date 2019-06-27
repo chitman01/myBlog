@@ -9,7 +9,8 @@ class AdminController extends Controller
 {
     function index()
     {
-        return view('admin/dashboard');
+        //return view('admin/dashboard');
+        return view('nav');
     }
 
     function profile(){

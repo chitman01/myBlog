@@ -1,4 +1,6 @@
 @auth
+<meta name="_token" content="{{ csrf_token() }}">
+
 <style>
     #blog {
         padding: 0px 0px 10px 0px;
@@ -17,7 +19,6 @@
         float: right;
     }
 </style>
-<meta name="_token" content="{{ csrf_token() }}">
 
 <div class="container full_sc">
     <div class="col-sm">
@@ -29,8 +30,8 @@
 
             <form class="form-inline right" name="searchform" id="searchform">
                 <div class="form-group">
-                    <label for="textsearch">User</label>
-                    <input type="text" name="textsearch" id="textsearch" class="form-control" placeholder="user search" autocomplete="off">
+                    <label for="textsearch_user">User</label>
+                    <input type="text" name="textsearch_user" id="textsearch_user" class="form-control" placeholder="user search" autocomplete="off">
                 </div>
             </form>
         </div>
@@ -66,35 +67,34 @@
                     @endforeach
                 </tr>
             </tbody>
-
         </table>
     </div>
-
 </div class="row">
+
 <div class="col-sm-2">
     <a href="{{route('index')}}" class="btn btn-info">back to index</a>
 </div>
 
 <script>
-        $("#textsearch").on('keyup', function() {
-            var value = $(this).val();
-            console.log(value);
-            $.ajax({
-                type: 'get',
-                url: '{{URL::to('search')}}',
-                data: {
-                    'search': value
-                },
-                success: function(data) {
-                    console.log("success ajax");
-                    $('tbody').html(data);
-                },
-                error: function(data) {
-                    //alert(data.responseText)
-                    console.log("error ajax");
-                }
-            });
-        });
+$("#textsearch_user").on('keyup', function() {
+    var value = $(this).val();
+    console.log(value);
+    $.ajax({
+        type: 'get',
+        url: '{{URL::to('search')}}',
+        data: {
+            'search': value
+        },
+        success: function(data) {
+            console.log("success ajax");
+            $('tbody').html(data);
+        },
+        error: function(data) {
+            //alert(data.responseText)
+            console.log("error ajax");
+        }
+    });
+});
 </script>
 
 <script type="text/javascript">

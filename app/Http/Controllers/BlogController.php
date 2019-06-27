@@ -20,10 +20,10 @@ class BlogController extends Controller
                 foreach ($get_data as $key => $raw) {
                     $output .= '<tr>' .
                         '<td>' . $raw->id . '</td>' .
-                        '<td>' . substr($raw->title,1,10) . '</td>' .
-                        '<td>' . substr($raw->detail,1,10) . '</td>' .
-                        '<td>' . substr($raw->image_filename,1,10) . '</td>' .
-                        '<td>' . substr($raw->original_image_filename,1,10) . '</td>' .
+                        '<td>' . substr($raw->title,0,10) . '</td>' .
+                        '<td>' . substr($raw->detail,0,10) . '</td>' .
+                        '<td>' . substr($raw->image_filename,0,10) . '</td>' .
+                        '<td>' . substr($raw->original_image_filename,0,10) . '</td>' .
                         '<td>' . $raw->created_at . '</td>' .
                         '<td>' .'<button type="submit" class="btn btn-danger delete_blog" id="'.$raw->id.'">Delete</button>'. '</td>'.
                         '</tr>';
@@ -42,10 +42,10 @@ class BlogController extends Controller
                 foreach ($blogs as $key => $raw) {
                     $output .= '<tr>' .
                         '<td>' . $raw->id . '</td>' .
-                        '<td>' . substr($raw->title,1,10) . '</td>' .
-                        '<td>' . substr($raw->detail,1,10) . '</td>' .
-                        '<td>' . substr($raw->image_filename,1,10) . '</td>' .
-                        '<td>' . substr($raw->original_image_filename,1,10) . '</td>' .
+                        '<td>' . substr($raw->title,0,10) . '</td>' .
+                        '<td>' . substr($raw->detail,0,10) . '</td>' .
+                        '<td>' . substr($raw->image_filename,0,10) . '</td>' .
+                        '<td>' . substr($raw->original_image_filename,0,10) . '</td>' .
                         '<td>' . $raw->created_at . '</td>' .
                         '<td>' .'<button type="submit" class="btn btn-danger delete_blog" id="'.$raw->id.'">Delete</button>'. '</td>'.
                         '</tr>';
@@ -62,11 +62,9 @@ class BlogController extends Controller
     public function index()
     {
         //$blog = DB::table('blogs')->paginate(5);
-        $blog = DB::table('blogs')->take(3)->get();
-
+        $blog = DB::table('blogs')->paginate(3);
         $count = DB::table('blogs')->count();
-        return view(
-            'blog.blog',
+        return view('blog.blog',
             [
                 'blog' => $blog,
                 'count' => $count

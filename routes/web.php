@@ -35,6 +35,8 @@ Route::get('/search_blog','BlogController@search')->name('search_blog');
 Route::get('/navigation_user','userController@navigation_user');
 
 Route::get('/Pagination_blog','BlogController@Pagination_blog');
+Route::get('/start_page','BlogController@start_page');
+
 
 Route::POST('/check','HomeController@check')->name('check');
 

@@ -19,7 +19,7 @@
 </style>
 <meta name="_token" content="{{ csrf_token() }}">
 
-<div class="container full_sc">
+<div class="container full_sc" style="border-style: solid; background-color:silver;">
     <div class="col-sm">
         <h1>Dashboard -> blog</h1><!-- https://www.itoffside.com/php-search-mysql-by-ajax/ -->
         <div class="col" id="blog">
@@ -29,8 +29,8 @@
 
             <form class="form-inline right" name="searchform" id="searchform">
                 <div class="form-group">
-                    <label for="textsearch">Blog</label>
-                    <input type="text" name="textsearch" id="textsearch" class="form-control" placeholder="user search" autocomplete="off">
+                    <label for="textsearch_blog">Blog</label>
+                    <input type="text" name="textsearch_blog" id="textsearch_blog" class="form-control" placeholder="user search" autocomplete="off">
                 </div>
             </form>
         </div>
@@ -53,7 +53,7 @@
         <h2>{{ \Session::get('delete')}}</h2>
     </div>
     @endif
-
+    
     <div class="col-sm" border="1">
         <table class="table table-bordered table-striped" align="center">
             <thead>
@@ -102,19 +102,19 @@
         <div class="center">
             <ul class="pagination" role="navigation">
                 <li class="page-item page-item_Previous disabled" aria-label="« Previous">
-                    <a class="page-link" href="#" rel="previous" aria-hidden="true">‹</a>
+                    <a class="page-link a" href="#" rel="previous" aria-hidden="true" style="pointer-events:none;">‹</a>
                 </li>
                 <?php
+                $nub = $count;
                 for ($i = 0; $i <= $count; $i++) {
                     ?>
                     <li class="page-item"><a class="page-link a" href="#" id="page<?php echo ($i + 1); ?>"><?php echo ($i + 1); ?></a></li>
                     <?php
-
                     $count -= 3;
                 }
                 ?>
-                <li class="page-item">
-                    <a class="page-link page-link_Next" href="#" rel="next" aria-label="Next »">›</a>
+                <li class="page-item page-link_Next">
+                    <a class="page-link a" href="#" rel="next" aria-label="Next »">›</a>
                 </li>
             </ul>
         </div>
@@ -159,7 +159,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <br>
@@ -167,9 +166,9 @@
 </div>
 
 <script>
+    var page_num = 1;
 
-$(document).ready(function() {
-        $("#textsearch").on('keyup', function() {
+        $(document).on('keyup',"#textsearch_blog", function() {
             var value = $(this).val();
             console.log(value);
             $.ajax({
@@ -188,12 +187,29 @@ $(document).ready(function() {
                 }
             });
         });
-    });
+
         $(document).on('click',".a",function() {
-            var number_of_page = $(this).text();
-            page_num = parseInt(number_of_page);
-            console.log(number_of_page);
-                var data1 = number_of_page * 3;
+            var nub = <?php echo $nub; ?>;
+            var input_data = $(this).text();
+            
+
+            if(isNaN(input_data)){
+                if(input_data=='‹'){
+                    var number_of_page = page_num -= 1;
+                } else{
+                    console.log("input_data : "+input_data);
+                    var number_of_page  = page_num += 1;
+                }
+
+                console.log("number_of_page : "+number_of_page);
+                page_num = parseInt(number_of_page);
+                console.log("< >");
+            }else{
+                console.log("num");
+                page_num = parseInt(input_data);
+                console.log(page_num);
+            }
+                var data1 = page_num * 3;
                 var data2 = data1 - 2;
             $.ajax({
                 type: 'get',
@@ -217,6 +233,13 @@ $(document).ready(function() {
             }else{
                 $(".page-item_Previous").addClass("disabled");
             }
+            if(page_num>(nub%3)){
+                $(".page-link_Next").addClass("disabled");
+            }else{
+                $(".page-link_Next").removeClass("disabled");
+            }
+            
+
         });
 </script>
 
