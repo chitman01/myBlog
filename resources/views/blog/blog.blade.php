@@ -11,15 +11,23 @@
 
     .full_sc {
         width: 100%;
+        background-color:white;
+        padding-bottom: 10px;
     }
 
     .right {
         float: right;
     }
+    li:nth-child(odd) {
+    color: #777;
+}
+li:nth-child(even) {
+    color: blue;
+}
 </style>
 <meta name="_token" content="{{ csrf_token() }}">
 
-<div class="container full_sc" style="border-style: solid; background-color:silver;">
+<div class="container full_sc" >
     <div class="col-sm">
         <h1>Dashboard -> blog</h1><!-- https://www.itoffside.com/php-search-mysql-by-ajax/ -->
         <div class="col" id="blog">
@@ -54,7 +62,7 @@
     </div>
     @endif
     
-    <div class="col-sm" border="1">
+    <div class="col-sm table-responsive" border="1">
         <table class="table table-bordered table-striped" align="center">
             <thead>
                 <tr>

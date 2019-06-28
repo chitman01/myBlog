@@ -101,7 +101,7 @@ body,
 
             /*colors dropdown box text */
             .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
-                color: #777;
+                color: #999;
             }
 
             /*gives sidebar width/height*/
@@ -127,7 +127,7 @@ body,
             /*for hiden things when navbar hidden*/
             .forAnimate {
                 opacity: 0;
-                background-color: #555;
+                background-color: #999;
             }
         }
 
@@ -169,6 +169,10 @@ body,
         }
 
         .intro {
-  font-size: 150%;
-  color: red;
-}
+            font-size: 150%;
+            color: red;
+        }
+
+        body{
+            background-color:#777;
+        }

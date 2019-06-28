@@ -13,6 +13,8 @@
 
     .full_sc {
         width: 100%;
+        background-color:white;
+        padding-bottom: 10px;
     }
 
     .right {
@@ -39,7 +41,7 @@
 
 
 
-    <div class="col-sm" border="1">
+    <div class="col-sm table-responsive" border="1">
         <table class="table table-bordered table-striped" align="center">
             <thead>
                 <tr>
@@ -69,11 +71,13 @@
             </tbody>
         </table>
     </div>
+
+    <div class="col-sm-2">
+        <a href="{{route('index')}}" class="btn btn-info">back to index</a>
+    </div>
 </div class="row">
 
-<div class="col-sm-2">
-    <a href="{{route('index')}}" class="btn btn-info">back to index</a>
-</div>
+
 
 <script>
 $("#textsearch_user").on('keyup', function() {
