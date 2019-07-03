@@ -1,6 +1,7 @@
 <style>
     .blog {
         padding: 10px 0px 10px 0px;
+        border-style: double;
     }
 
     img {
@@ -73,10 +74,6 @@
                     <div class="form-group">
                         <label for="title">Title</label>
                         <input type="text" name="title" class="form-control" id="title" />
-                    </div>
-                    <div class="form-group">
-                        <label for="detail">detail</label>
-                        <textarea type="text" name="detail" class="form-control" rows="5" id="detail"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="image">image</label>

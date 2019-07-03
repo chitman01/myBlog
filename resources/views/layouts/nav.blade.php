@@ -56,7 +56,7 @@
                             <li class="divider"></li>
                         </ul>
                     </li>
-                    <li id="nav_li_Home"><a href="">Back To Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                    <li id="nav_li_Home"><a href="{{action('HomeController@home')}}">Back To Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
                 </ul>
             </div>
         </div>
