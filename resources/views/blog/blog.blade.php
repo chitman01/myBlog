@@ -30,17 +30,24 @@ li:nth-child(even) {
 <div class="container full_sc" >
     <div class="col-sm">
         <h1>Dashboard -> blog</h1><!-- https://www.itoffside.com/php-search-mysql-by-ajax/ -->
-        <div class="col" id="blog">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                Add Blog
-            </button>
-
+        <div class="row" id="blog">
+            <div class="col-sm-1">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                    Add Blog
+                </button>
+            </div>
+            <div class="col-sm-2">
+                <p>Page -> </p>
+            </div>
+            <div class="right">
             <form class="form-inline right" name="searchform" id="searchform">
                 <div class="form-group">
                     <label for="textsearch_blog">Blog</label>
                     <input type="text" name="textsearch_blog" id="textsearch_blog" class="form-control" placeholder="user search" autocomplete="off">
                 </div>
             </form>
+            </div>
+            
         </div>
     </div>
 
@@ -110,7 +117,7 @@ li:nth-child(even) {
         <div class="center">
             <ul class="pagination" role="navigation">
                 <li class="page-item page-item_Previous disabled" aria-label="« Previous">
-                    <a class="page-link a" href="#" rel="previous" aria-hidden="true" style="pointer-events:none;">‹</a>
+                    <a class="page-link a" href="#" rel="previous">‹</a>
                 </li>
                 <?php
                 $nub = $count;
@@ -199,8 +206,6 @@ li:nth-child(even) {
         $(document).on('click',".a",function() {
             var nub = <?php echo $nub; ?>;
             var input_data = $(this).text();
-            
-
             if(isNaN(input_data)){
                 if(input_data=='‹'){
                     var number_of_page = page_num -= 1;

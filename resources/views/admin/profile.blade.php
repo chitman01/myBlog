@@ -9,6 +9,8 @@
 
     .full_sc {
         width: 100%;
+        background-color:white;
+        padding-bottom: 10px;
     }
 
     .center {
@@ -18,10 +20,6 @@
 
     .set {
         padding: 20px 0px 1px 0px;
-    }
-
-    div {
-        border-style: solid;
     }
 </style>
 
