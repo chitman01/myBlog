@@ -1,7 +1,6 @@
 <style>
     .blog {
-        padding: 10px 0px 10px 0px;
-        border-style: double;
+        padding: 10px 0px;
     }
 
     img {
@@ -22,30 +21,72 @@
     .set {
         padding: 20px 0px 1px 0px;
     }
+
+    .detail_profile p{
+        margin:20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height:100px;
+    }
 </style>
 
 <div class="container full_sc">
     <div class="col-sm">
-        <h1>Dashboard -> Profile</h1>
-        <div class="col blog">
-            <div class="container" align="center">
+        <h1>Dashboard -> Profile <span class="glyphicon glyphicon-user"></h1>
+        <div class="row blog">
+            <div class="col-sm-4" align="center">
                 <img src="http://begmetobuyit.com/application/css/images/noImage.jpg" alt="Paris" width="250" height="250">
             </div>
-            <div class="row justify-content-sm-center blog">
-                <div class="col-sm-2 col-sm-offset-4">
-                    <h3>Name :</h3>
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="col-sm-2" style="float:left">
+                        <p><b>Id <span class="glyphicon glyphicon-user"> :</b></p>
+                        <p><b>Name :</b></p>
+                        <p><b>Email <span class="glyphicon glyphicon-envelope"> :</b></p>
+                        
+                    </div>
+                    <div class="col-sm-4" style="float:">
+                        <p>007</p>
+                        <p>Jame ball</p>
+                        <p>Jameball_007@jian.com</p>
+                    </div>
                 </div>
-                <div class="col-md-2 set">
-                    <p>Halajugu mujuru</p>
-                </div>
-
-            </div>
-            <div class="row justify-content-md-center blog">
-                <div class="col-md-2 col-md-offset-4">
-                    <h2>Contact</h2>
-                </div>
-                <div class="col-md-2 set">
-                    <p>123/12 </p>
+                <div class="row">
+                    <div class="col-sm-2" style="float:left">
+                        <p><b>Last login :</b></p>
+                        
+                    </div>
+                    <div class="col-sm-4" style="float:">
+                        <p>17:21:32 11/04/2019</p>
+                    </div>
+                </div>  	
+                <div class="row">
+                    <div class="col-sm-4">
+                    <p><b>Last blog update <span class="glyphicon glyphicon-search"> :</span></b></p>
+                    </div>
+                    <div class="col-sm-8" style="float:">
+                        <a href="#"><p>ปลากัดอย่ากัดตอบ</p></a>
+                        <a href="#"><p>โดเรม่อนที่หายไป</p></a>
+                        <a href="#"><p>ปลากัดอย่ากัดตอบ</p></a>
+                        <a href="#"><p>โดเรม่อนที่หายไป</p></a>
+                        <a href="#"><p>ปลากัดอย่ากัดตอบ</p></a>
+                        <a href="#"><p>โดเรม่อนที่หายไป</p></a>
+                        <a href="#"><p>ปลากัดอย่ากัดตอบ</p></a>
+                        <a href="#"><p>โดเรม่อนที่หายไป</p></a>
+                        <a href="#"><p>ปลากัดอย่ากัดตอบ</p></a>
+                        <a href="#"><p>โดเรม่อนที่หายไป</p></a>
+                        <a href="#"><p>ปลากัดอย่ากัดตอบ</p></a>
+                        <a href="#"><p>โดเรม่อนที่หายไป</p></a>
+                        <a href="#"><p>ปลากัดอย่ากัดตอบ</p></a>
+                        <a href="#"><p>โดเรม่อนที่หายไป</p></a>
+                        <a href="#"><p>ปลากัดอย่ากัดตอบ</p></a>
+                        <a href="#"><p>โดเรม่อนที่หายไป</p></a>
+                        <a href="#"><p>ปลากัดอย่ากัดตอบ</p></a>
+                        <a href="#"><p>โดเรม่อนที่หายไป</p></a>
+                        <a href="#"><p>ปลากัดอย่ากัดตอบ</p></a>
+                        <a href="#"><p>โดเรม่อนที่หายไป</p></a>
+                    </div>
                 </div>
             </div>
         </div>

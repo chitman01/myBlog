@@ -62,7 +62,7 @@
         </div>
     </nav>
     <div class="main">
-            @yield('content')
+            @include('admin.dashboard')
     </div>
 
     <script type="text/javascript">

@@ -10,21 +10,6 @@ use App\blog;
 
 class BlogController extends Controller
 {
-    function blog()
-    {
-     $data = DB::table('blogs')->paginate(5);
-     return view('blog.blog', compact('data'));
-    }
-
-    function fetch_data(Request $request)
-    {
-     if($request->ajax())
-     {
-      $data = DB::table('blogs')->paginate(5);
-      return view('blog.pagination_data', compact('data'))->render();
-     }
-    }
-
     function Pagination_blog(Request $data)
     {
         if ($data->ajax()) {
@@ -76,8 +61,15 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $data = DB::table('blogs')->paginate(5);
-     return view('blog.blog', compact('data'));
+        //$blog = DB::table('blogs')->paginate(5);
+        $blog = DB::table('blogs')->paginate(3);
+        $count = DB::table('blogs')->count();
+        return view('blog.blog',
+            [
+                'blog' => $blog,
+                'count' => $count
+            ]
+        );
     }
 
     /**
