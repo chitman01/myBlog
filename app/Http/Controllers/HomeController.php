@@ -57,7 +57,7 @@ class HomeController extends Controller
     public function user()
     {
         $user = DB::select('select * from users');
-        return view('user')
+        return view('admin.user')
             ->with(compact('user'));
     }
 

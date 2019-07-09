@@ -36,10 +36,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                 <ul class="nav navbar-nav nav_ul_top">
-                    <li id="nav_li_dashboard" class="active"><a href="#">DashBoard<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></a></li>
-                    <li id="nav_li_profile"><a href="#">Profile<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
-                    <li id="nav_li_blog"><a href="#">Blog<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
-                    <li id="nav_li_user"><a href="#">User<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span></a></li>
+                    <li id="nav_li_dashboard"><a href="{{route('dashboard')}}">DashBoard<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></a></li>
+                    <li id="nav_li_profile"><a href="{{route('profile')}}">Profile<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
+                    <li id="nav_li_blog"><a href="{{route('blog.index')}}">Blog<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-list-alt"></span></a></li>
+                    <li id="nav_li_user"><a href="{{route('user')}}">User<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-book"></span></a></li>
                     <li id="nav_li_messages"><a href="#">Messages<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-envelope"></span></a></li>
                 </ul>
             </div>
@@ -62,32 +62,11 @@
         </div>
     </nav>
     <div class="main">
-            @include('admin.dashboard')
+        @yield('content')
+        {{-- @include('admin.dashboard') --}}
     </div>
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#nav_li_dashboard").click(function() {
-                $(".nav_ul_top li").removeClass("active");
-                $("#nav_li_dashboard").addClass("active");
-                $(".main").load("{{route('dashboard')}}");
-            });
-            $("#nav_li_profile").click(function() {
-                $(".nav_ul_top li").removeClass("active");
-                $("#nav_li_profile").addClass("active");
-                $(".main").load("{{route('profile')}}");
-            });
-            $("#nav_li_blog").click(function() {
-                $(".nav_ul_top li").removeClass("active");
-                $("#nav_li_blog").addClass("active");
-                $(".main").load("{{route('blog.index')}}");
-            });
-            $("#nav_li_user").click(function() {
-                $(".nav_ul_top li").removeClass("active");
-                $("#nav_li_user").addClass("active");
-                $(".main").load("{{route('user')}}");
-            });
-        });
 
         function htmlbodyHeightUpdate() {
             var height3 = $(window).height()
@@ -115,30 +94,30 @@
 
         // Form blog -> delete
         $(document).on('click',".delete_blog",function() {
-        var id = this.id;
-        console.log(id);
-        var confirm_delete = confirm("Press a button!");
-        if (confirm_delete == true) {
-            console.log("You pressed OK!");
-            $.ajax({
-                type: 'get',
-                url: '{{URL::to('blog_destroy')}}',
-                data: {
-                    "id": id
-                },
-                success: function(data) {
-                    console.log("Delete Success");
-                    $("#tr"+id).remove();
-                
-                },
-                error: function(data) {
-                    console.log("error ajax");
-                }
-            });
-        } else {
-            console.log("You pressed Cancel!");
-        }
-    });
+            var id = this.id;
+            console.log(id);
+            var confirm_delete = confirm("Press a button!");
+            if (confirm_delete == true) {
+                console.log("You pressed OK!");
+                $.ajax({
+                    type: 'get',
+                    url: '{{URL::to('blog_destroy')}}',
+                    data: {
+                        "id": id
+                    },
+                    success: function(data) {
+                        console.log("Delete Success");
+                        $("#tr"+id).remove();
+                    
+                    },
+                    error: function(data) {
+                        console.log("error ajax");
+                    }
+                });
+            } else {
+                console.log("You pressed Cancel!");
+            }
+        });
     </script>
 
 

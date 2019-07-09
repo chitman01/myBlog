@@ -1,3 +1,5 @@
+@extends('layouts.nav')
+@section('content')
 @auth
 <meta name="_token" content="{{ csrf_token() }}">
 
@@ -27,7 +29,7 @@
         <h1>Dashboard -> User</h1>
         <div class="col" id="blog">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                Add Blog
+                Add User
             </button>
 
             <form class="form-inline right" name="searchform" id="searchform">
@@ -77,8 +79,6 @@
     </div>
 </div class="row">
 
-
-
 <script>
 $("#textsearch_user").on('keyup', function() {
     var value = $(this).val();
@@ -109,5 +109,5 @@ $("#textsearch_user").on('keyup', function() {
     });
 </script>
 
-
 @endauth
+@endsection

@@ -1,3 +1,5 @@
+@extends('layouts.nav')
+@section('content')
 @auth
 <style>
     #blog {
@@ -38,9 +40,6 @@
                     Add Blog
                 </button>
             </div>
-            <div class="col-sm-2">
-                <p>Page -> </p>
-            </div>
             <div class="right">
                 <form class="form-inline right" name="searchform" id="searchform">
                     <div class="form-group">
@@ -49,14 +48,11 @@
                     </div>
                 </form>
             </div>
-
-
-            <div id="table_data">
-                @include('blog.pagination_data')
-            </div>
-
-
         </div>
+    </div>
+
+    <div id="table_data">
+        @include('blog.pagination_data')
     </div>
 
     @if(count($errors) > 0)
@@ -82,31 +78,29 @@
     <a href="{{route('index')}}" class="btn btn-info">back to index</a>
 </div>
 
+
+
 <script>
+    $(document).ready(function() {
 
-    $(document).ready(function(){
-
-    $(document).on('click', '.pagination a', function(event){
-        event.preventDefault(); 
-        var page = $(this).attr('href').split('page=')[1];
-        fetch_data(page);
-    });
-
-    function fetch_data(page)
-    {
-        $.ajax({
-            url:"/pagination/fetch_data?page="+page,
-            success:function(data){
-                $('#table_data').html(data);
-            }
+        $(document).on('click', '.pagination a', function(event) {
+            event.preventDefault();
+            var page = $(this).attr('href').split('page=')[1];
+            fetch_data(page);
         });
-    }
 
+        function fetch_data(page) {
+            $.ajax({
+                url: "/pagination/fetch_data?page=" + page,
+                success: function(data) {
+                    $('#table_data').html(data);
+                }
+            });
+        }
     });
 
 
     var page_num = 1;
-
     $(document).on('keyup', "#textsearch_blog", function() {
         var value = $(this).val();
         console.log(value);
@@ -138,3 +132,4 @@
 </script>
 
 @endauth
+@endsection

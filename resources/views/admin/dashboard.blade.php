@@ -1,3 +1,5 @@
+@extends('layouts.nav')
+@section('content')
 <style>
     .blog {
         padding: 10px 0px 10px 0px;
@@ -164,3 +166,5 @@
 </div>
 </div>
 </div>
+
+@endsection
