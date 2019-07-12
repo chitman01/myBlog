@@ -7,66 +7,29 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\blog;
+use SebastianBergmann\Environment\Console;
 
 class BlogController extends Controller
 {
     function blog()
     {
-     $data = DB::table('blogs')->paginate(5);
-     return view('blog.blog', compact('data'));
+        $data = DB::table('blogs')->paginate(5);
+        return view('blog.blog', compact('data'));
     }
 
     function fetch_data(Request $request)
     {
-     if($request->ajax())
-     {
-      $data = DB::table('blogs')->paginate(5);
-      return view('blog.pagination_data', compact('data'))->render();
-     }
-    }
-
-    function Pagination_blog(Request $data)
-    {
-        if ($data->ajax()) {
-            $output = "";
-            $get_data = DB::table('blogs')
-                ->whereBetween('id', array($data->data2,$data->data1))->get();
-            if ($get_data) {
-                foreach ($get_data as $key => $raw) {
-                    $output .= '<tr>' .
-                        '<td>' . $raw->id . '</td>' .
-                        '<td>' . substr($raw->title,0,10) . '</td>' .
-                        '<td>' . substr($raw->detail,0,10) . '</td>' .
-                        '<td>' . substr($raw->image_filename,0,10) . '</td>' .
-                        '<td>' . substr($raw->original_image_filename,0,10) . '</td>' .
-                        '<td>' . $raw->created_at . '</td>' .
-                        '<td>' .'<button type="submit" class="btn btn-danger delete_blog" id="'.$raw->id.'">Delete</button>'. '</td>'.
-                        '</tr>';
-                }
-                return Response($output);
-            }
+        if ($request->ajax()) {
+            $data = DB::table('blogs')->paginate(5);
+            return view('blog.pagination_data', compact('data'))->render();
         }
     }
 
-    function search(Request $data)
+    function search(Request $request)
     {
-        if ($data->ajax()) {
-            $output = "";
-            $blogs = DB::table('blogs')->where('title', 'LIKE', '%' . $data->search . '%')->get();
-            if ($blogs) {
-                foreach ($blogs as $key => $raw) {
-                    $output .= '<tr>' .
-                        '<td>' . $raw->id . '</td>' .
-                        '<td>' . substr($raw->title,0,10) . '</td>' .
-                        '<td>' . substr($raw->detail,0,10) . '</td>' .
-                        '<td>' . substr($raw->image_filename,0,10) . '</td>' .
-                        '<td>' . substr($raw->original_image_filename,0,10) . '</td>' .
-                        '<td>' . $raw->created_at . '</td>' .
-                        '<td>' .'<button type="submit" class="btn btn-danger delete_blog" id="'.$raw->id.'">Delete</button>'. '</td>'.
-                        '</tr>';
-                }
-                return Response($output);
-            }
+        if ($request->ajax()) {
+            $data = DB::table('blogs')->where('title', 'LIKE', '%' . $request->search . '%')->paginate(5);
+            return view('blog.pagination_data', compact('data'))->render();
         }
     }
     /**
@@ -77,7 +40,7 @@ class BlogController extends Controller
     public function index()
     {
         $data = DB::table('blogs')->paginate(5);
-     return view('blog.blog', compact('data'));
+        return view('blog.blog', compact('data'));
     }
 
     /**
@@ -180,6 +143,6 @@ class BlogController extends Controller
         $delete = Blog::find($data->id);
         dd($data->id);
         //$delete->delete();
-       //return redirect()->route('blog.index')->with('delete', 'ลบสำเร็จแล้ว');
+        //return redirect()->route('blog.index')->with('delete', 'ลบสำเร็จแล้ว');
     }
 }

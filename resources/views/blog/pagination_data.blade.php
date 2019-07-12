@@ -31,13 +31,18 @@
                     </td>
                     <td>{{$row->created_at}}</td>
                     <td>
-                        
+                        <a href="#" style="padding:5px">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </a>
                         <button type="submit" class="btn btn-danger delete_blog" id="{{$row->id}}">Delete</button>
                     </td>
                 </tr>
         @endforeach
     </table>
 
-    {!! $data->links() !!}
+    <div align="center">
+        {!! $data->links() !!}
+    </div>
+    
 
 </div>

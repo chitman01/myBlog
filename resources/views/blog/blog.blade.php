@@ -1,6 +1,7 @@
 @extends('layouts.nav')
 @section('content')
 @auth
+@include('blog.blog_add_model')
 <style>
     #blog {
         padding: 0px 0px 10px 0px;
@@ -30,6 +31,8 @@
     }
 </style>
 <meta name="_token" content="{{ csrf_token() }}">
+<script src="https://cdn.ckeditor.com/ckeditor5/12.3.0/classic/ckeditor.js"></script>
+
 
 <div class="container full_sc">
     <div class="col-sm">
@@ -72,8 +75,7 @@
         <h2>{{ \Session::get('delete')}}</h2>
     </div>
     @endif
-
-
+    
     <br>
     <a href="{{route('index')}}" class="btn btn-info">back to index</a>
 </div>
@@ -81,6 +83,12 @@
 
 
 <script>
+    ClassicEditor
+        .create( document.querySelector( '#detail' ) )
+        .catch( error => {
+        console.error( error );
+    } );
+
     $(document).ready(function() {
 
         $(document).on('click', '.pagination a', function(event) {
@@ -103,20 +111,17 @@
     var page_num = 1;
     $(document).on('keyup', "#textsearch_blog", function() {
         var value = $(this).val();
-        console.log(value);
         $.ajax({
             type: 'get',
-            url: '{{URL::to('
-            search_blog ')}}',
+            url: '{{URL::to('search_blog ')}}',
             data: {
                 'search': value
             },
             success: function(data) {
                 console.log("success ajax");
-                $('tbody').html(data);
+                $('#table_data').html(data);
             },
             error: function(data) {
-                //alert(data.responseText)
                 console.log("error ajax");
             }
         });
