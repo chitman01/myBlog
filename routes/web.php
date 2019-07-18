@@ -20,8 +20,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/dashboard', 'admin\AdminController@index')->name('dashboard');
     });
 });
-Route::get('/pagination', 'PaginationController@index');
-Route::get('pagination/fetch_data', 'PaginationController@fetch_data');
+Route::get('/pagination', 'BlogController@index');
+Route::get('/pagination/fetch_data', 'BlogController@fetch_data');
 
 
 Route::get('profile','admin\AdminController@profile')->name('profile');

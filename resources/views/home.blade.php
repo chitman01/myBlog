@@ -39,7 +39,10 @@ $(document).ready(function(){
                         <img class="card-img-top" src="{{url('uploads/'.$row->image_filename)}}" alt="{{$row->image_filename}}" style="width:100%">
                         <div class="card-body">
                             <h3 type="text" class="card-title ">{{$row->title}}</h3>
-                            <p class="card-text">{{$row->detail}}</p>
+                            @php
+                                $str = "{$row->detail}"; 
+                                echo $str; 
+                            @endphp
                         </div>
                     </div>
                 </a>
@@ -50,7 +53,7 @@ $(document).ready(function(){
     <div class="center">
         {!! $blog->render() !!}
     </div>
-
+    
     <a href="{{route('index')}}" class="btn btn-info">back to index</a>
 </div>
 

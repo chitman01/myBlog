@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta name="_token" content="{{ csrf_token() }}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <head>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -67,6 +67,11 @@
     </div>
 
     <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
 
         function htmlbodyHeightUpdate() {
             var height3 = $(window).height()
@@ -120,14 +125,5 @@
         });
     </script>
 
-
-<script type="text/javascript">
-    $.ajaxSetup({
-        headers: {
-            'csrftoken': '{{ csrf_token() }}'
-        }
-    });
-</script>
 </body>
-
 </html>

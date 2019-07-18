@@ -94,14 +94,19 @@
         $(document).on('click', '.pagination a', function(event) {
             event.preventDefault();
             var page = $(this).attr('href').split('page=')[1];
+            console.log("pagination 1 : "+page);
             fetch_data(page);
         });
 
         function fetch_data(page) {
+            console.log("pagination 2 : "+page);
             $.ajax({
-                url: "/pagination/fetch_data?page=" + page,
+                url: "/pagination/fetch_data?page="+page,
                 success: function(data) {
                     $('#table_data').html(data);
+                },
+                error: function(data) {
+                    console.log("error ajax :"+data);
                 }
             });
         }
@@ -113,7 +118,7 @@
         var value = $(this).val();
         $.ajax({
             type: 'get',
-            url: '{{URL::to('search_blog ')}}',
+            url: '{{URL::to('search_blog')}}',
             data: {
                 'search': value
             },
