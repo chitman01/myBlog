@@ -110,27 +110,29 @@
                 }
             });
         }
-    });
 
-
-    var page_num = 1;
-    $(document).on('keyup', "#textsearch_blog", function() {
-        var value = $(this).val();
-        $.ajax({
-            type: 'get',
-            url: '{{URL::to('search_blog')}}',
-            data: {
-                'search': value
-            },
-            success: function(data) {
-                console.log("success ajax");
-                $('#table_data').html(data);
-            },
-            error: function(data) {
-                console.log("error ajax");
-            }
+        var page_num = 1;
+        $(document).on('keyup', "#textsearch_blog", function() {
+            var value = $(this).val();
+            $.ajax({
+                type: 'get',
+                url: '{{URL::to('search_blog')}}',
+                data: {
+                    'search': value
+                },
+                success: function(data) {
+                    console.log("success ajax");
+                    $('#table_data').html(data);
+                },
+                error: function(data) {
+                    console.log("error ajax");
+                }
+            });
         });
     });
+
+
+    
 </script>
 
 <script type="text/javascript">

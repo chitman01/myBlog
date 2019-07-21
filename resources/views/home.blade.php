@@ -11,7 +11,13 @@ $(document).ready(function(){
 </script>
 <style>
     .card_body {
-        width: 400px;
+        height: 400px;
+        padding: 5px 5px 5px 5px;
+        color: black;
+    }
+
+    .card_body2 {
+        height: 400px;
         padding: 5px 5px 5px 5px;
         color: black;
     }
@@ -31,11 +37,10 @@ $(document).ready(function(){
 <div class="container">
     <div class="row">
         @foreach($blog as $row)
-        <div class="col-sm-4 card_body">
-            <div class="container ddc">
+            <div class="col-sm-3">
                 <a action="{{action('HomeController@check',$row->title)}}">
                     {{csrf_field()}}
-                    <div class="card">
+                    <div class="card card_body">
                         <img class="card-img-top" src="{{url('uploads/'.$row->image_filename)}}" alt="{{$row->image_filename}}" style="width:100%">
                         <div class="card-body">
                             <h3 type="text" class="card-title ">{{$row->title}}</h3>
@@ -47,7 +52,6 @@ $(document).ready(function(){
                     </div>
                 </a>
             </div>
-        </div>
         @endforeach
     </div>
     <div class="center">
